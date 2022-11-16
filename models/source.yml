@@ -1,1 +1,8 @@
+version: 2
+
+sources:
+  - name: wirecutter_final
+    tables:
+      - name: dbt_transformed_1
+      
 
