@@ -5,5 +5,9 @@ sources:
     tables:
       - name: daily_page_metrics_total
       - name: daily_page_metrics_by_consumption_type
+      - name: lifetime_post_metrics_total
+      - name: post_attachment_history
+      - name: post_history
+      
       
 
