@@ -1,4 +1,5 @@
-select  * from
+select  lmt.post_id,metric_date,post_clicks,post_impressions,post_reactions_anger_total,post_reactions_haha_total,post_reactions_like_total,post_reactions_love_total,post_reactions_sorry_total,post_reactions_wow_total,post_video_views
+url,media_type,share_count from
 
 (select post_id,date(date) as metric_date,post_clicks,post_impressions,post_reactions_anger_total,post_reactions_haha_total,post_reactions_like_total,post_reactions_love_total,post_reactions_sorry_total,post_reactions_wow_total,
  post_video_views
