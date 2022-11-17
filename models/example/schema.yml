@@ -10,7 +10,7 @@ models:
         
  
 
-  - name: my_first_dbt_model
+  - name: fb_lifetime_post_analytics
     description: "A starter dbt model"
     columns:
       - name: post_id
