@@ -13,4 +13,4 @@ select * from
  left join
  
 (select page_consumptions_by_consumption_type from  {{ source('wirecutter_final', 'daily_page_metrics_by_consumption_type') }}) ct
-on mt.date(date) = ct.date(date)
+on mt.metric_date = ct.date(date)
