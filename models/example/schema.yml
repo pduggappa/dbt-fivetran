@@ -2,7 +2,7 @@
 version: 2
 
 models:
-  - name: my_second_dbt_model
+  - name: fb_daily_page_metrics
     description: "A starter dbt model"
     columns:
       - name: page_id
