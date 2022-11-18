@@ -15,3 +15,24 @@ models:
     columns:
       - name: post_id
         description: "Facebook post id"
+
+
+  - name: insta_daily_page_metrics
+    description: "A starter dbt model"
+    columns:
+      - name: post_id
+        description: "Facebook post id"
+
+  
+  - name: insta_lifetime_page_metrics
+    description: "A starter dbt model"
+    columns:
+      - name: post_id
+        description: "Facebook post id"
+
+
+  - name: insta_post_metrics
+    description: "A starter dbt model"
+    columns:
+      - name: post_id
+        description: "Facebook post id"

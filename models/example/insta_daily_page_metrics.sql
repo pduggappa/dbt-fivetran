@@ -1,0 +1,1 @@
+select id as insta_page_id,impressions,reach,website_clicks from {{ source('instagram_business_fivatran', 'user_insights') }}
