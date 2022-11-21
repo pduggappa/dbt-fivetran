@@ -17,12 +17,12 @@ select mh.media_id, case when media_type = 'IMAGE' THEN video_views
                     like_count,comment_count
 from 
 
-(select user_id as page_id,id as media_id, media_type, permalink,username,is_story from `nyt-wccomposer-dev`.`instagram_business_fivatran`.`media_history`) mh
+(select user_id as page_id,id as media_id, media_type, permalink,username,is_story from {{ source('instagram_business_fivatran', 'media_history') }}) mh
 
 left join 
 
 (select id as media_id,_fivetran_synced, like_count,comment_count,reel_likes,carousel_album_engagement,carousel_album_impressions,video_photo_engagement,video_photo_reach,
 carousel_album_reach,carousel_album_saved,carousel_album_video_views,video_photo_impressions,reel_comments,reel_plays,
-reel_reach,reel_saved,reel_shares,reel_total_interactions,video_views from `nyt-wccomposer-dev`.`instagram_business_fivatran`.`media_insights`) mi
+reel_reach,reel_saved,reel_shares,reel_total_interactions,video_views from {{ source('instagram_business_fivatran', 'media_insights') }}) mi
 
 on mh.media_id = mi.media_id
