@@ -1,16 +1,18 @@
-select  lmt.post_id,metric_date,post_clicks,post_impressions,post_reactions_anger_total,post_reactions_haha_total,post_reactions_like_total,post_reactions_love_total,post_reactions_sorry_total,post_reactions_wow_total,post_video_views
-url,media_type,share_count from
+select qq.date,qq.post_id,post_impressions,engagement,post_clicks,post_reactions_anger_total,post_reactions_haha_total,post_reactions_like_total,post_reactions_love_total,post_reactions_sorry_total,post_reactions_wow_total,share_count,media_type from
+(SELECT date(metric_date) date,post_id,sum(post_clicks+post_reactions_anger_total+post_reactions_haha_total+post_reactions_like_total+post_reactions_love_total+post_reactions_sorry_total+post_reactions_wow_total+share_count) as engagement
+FROM (
+    SELECT *, ROW_NUMBER() OVER(partition by post_id order by metric_date desc) rn
+    FROM `nyt-wccomposer-dev.dbt_social_transforms.fb_lifetime_post_analytics`
+) t1
+WHERE rn = 1
+group by date,post_id
+ORDER BY post_id)qq
 
-(select post_id,date(date) as metric_date,post_clicks,post_impressions,post_reactions_anger_total,post_reactions_haha_total,post_reactions_like_total,post_reactions_love_total,post_reactions_sorry_total,post_reactions_wow_total,
- post_video_views
- from {{ source('wirecutter_final', 'lifetime_post_metrics_total') }}) lmt
- 
- left join
- 
-(select post_id,url,media_type from  {{ source('wirecutter_final', 'post_attachment_history') }}) pah
-on lmt.post_id = pah.post_id
+left join 
 
-left join
-
-(select id as post_id,share_count from {{ source('wirecutter_final', 'post_history') }}) ph
-on lmt.post_id = ph.post_id
+(select date(metric_date) date,post_id,post_clicks,post_reactions_anger_total,post_reactions_haha_total,post_reactions_like_total,post_reactions_love_total,post_reactions_sorry_total,post_reactions_wow_total,share_count,media_type,post_impressions from (
+    SELECT *, ROW_NUMBER() OVER(partition by post_id order by metric_date desc) rn
+    FROM `nyt-wccomposer-dev.dbt_social_transforms.fb_lifetime_post_analytics`
+) t1
+WHERE rn = 1)pp
+on qq.post_id = pp.post_id
